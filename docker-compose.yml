@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  qbg.webfront:
+    image: qbg.webfront
+    build:
+      context: ./Qbg.Webfront
+      dockerfile: Dockerfile

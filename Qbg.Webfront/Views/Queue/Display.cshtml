@@ -1,0 +1,34 @@
+@using Qbg.Webfront.ViewModels
+@model QueueDisplay
+
+@{
+    ViewData["Title"] = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <label class="col-2">Current Time:</label>
+    <div class="col-10">
+        @Model.CurrentTime.ToLocalTime()
+    </div>
+</div>
+<div class="row">
+    <label class="col-2">Currently Serving:</label>
+    <div class="col-10">
+        @Model.Serving
+    </div>
+</div>
+<div class="row">
+    <label class="col-2">Next Up:</label>
+    <div class="col-10">
+        @foreach (var nextUp in Model.NextUpList)
+        {
+            <div class="d-flex">
+                @nextUp
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    @Html.ActionLink("Add to Queue", "AddToQueue", "Queue", null , new { @class = "btn btn-primary" } )
+</div>

@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qbg.Data\Qbg.Data.csproj" />
+    <ProjectReference Include="..\Qbg.IRepos\Qbg.IRepos.csproj" />
+    <ProjectReference Include="..\Qbg.IServices\Qbg.IServices.csproj" />
+  </ItemGroup>
+
+</Project>

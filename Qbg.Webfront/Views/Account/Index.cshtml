@@ -1,0 +1,48 @@
+﻿@using Qbg.Webfront.ViewModels
+@model UserLogin
+
+@{    
+    ViewData["Title"] = "Login Page";
+}
+
+@using (Html.BeginForm("Login", "Account"))
+{ 
+    <div class="row">
+        <!-- Login Type -->
+        <div class="col">
+            <h3>1. Choose Login Area</h3>
+            <fieldset class="form-group">
+
+                @foreach (var roleType in Model.RoleTypesList)
+                {
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            @Html.RadioButtonFor(m => m.SelectedRoleType, (int)roleType, new { name = "roleTypeOption", id = (int)roleType, @class = "form-check-input" })
+                            @roleType.ToString()
+                        </label>
+                    </div>
+                }
+            </fieldset>
+        </div>
+
+        <!-- Credentials -->
+        <div class="col">
+            <div class="row">
+                <h3>2. Enter Credentials</h3>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Username)
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(m => m.Username, "Please enter your username.", new { @class = "text-danger" })*@
+            </div>
+            <div class="form-group">
+
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(m => m.Password, "Please enter your password.", new { @class = "text-danger" })*@
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+}
