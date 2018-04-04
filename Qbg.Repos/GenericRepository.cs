@@ -33,18 +33,15 @@ namespace Qbg.MySqlEfRepos
 
         public T Insert(T entity)
         {
-            try
-            {
+          
                 if (entity == null)
                 {
                     throw new ArgumentNullException("entity");
                 }
                 entities.Add(entity);
                 context.SaveChanges();
-            }catch(Exception ex)
-            {
 
-            }
+          
             return entity;
         }
 

@@ -33,7 +33,11 @@ namespace Qbg.Data
 
         public Role AssignRole(Role role)
         {
-            this.UserRoles?.Add(new UserRole(this, role));
+            if(this.UserRoles==null)
+            {
+                UserRoles = new List<UserRole>();
+            }
+            this.UserRoles.Add(new UserRole(this, role));
             return role;
         }
     }
