@@ -10,13 +10,15 @@ namespace Qbg.Services
 {
     public class UserService : IUserService
     {
-        private ISecurityService securityService;
         private IGenericRepository<User> userRepository;
+        private IGenericRepository<Role> roleRepository;
+        private ISecurityService securityService;
 
-        public UserService(IGenericRepository<User> userRepo, ISecurityService securityService)
+        public UserService(IGenericRepository<User> userRepo, IGenericRepository<Role> roleRepo, ISecurityService securityService)
         {
             this.userRepository = userRepo;
             this.securityService = securityService;
+            this.roleRepository = roleRepo;
         }
 
         public void DeleteUser(long id)
@@ -43,6 +45,15 @@ namespace Qbg.Services
         {
             user.Password = securityService.Hash(user.Password, "90a0b7426cff4fafb5b5223e51bcf6cc");
             return userRepository.Insert(user);
+        }
+
+        public void AssignRole(User user, RoleEnum role)
+        {
+            if (user.UserRoles == null)
+            {
+                user.UserRoles = new List<UserRole>();
+            }
+            user.UserRoles.Add(new UserRole(user, roleRepository.Get((long) role) ?? new Role(role)));            
         }
 
         public bool IsValid(string username, string password)

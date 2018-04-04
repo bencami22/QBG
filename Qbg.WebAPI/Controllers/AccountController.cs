@@ -37,7 +37,9 @@ namespace Qbg.WebAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]User user)
         {
-            user.AssignRole(new Role(RoleEnum.Queuer));
+            userService.AssignRole(user, RoleEnum.Queuer);
+            userService.AssignRole(user, RoleEnum.Server);
+
             if (user != null)
             {
                 userService.InsertUser(user);

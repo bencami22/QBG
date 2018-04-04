@@ -14,5 +14,6 @@ namespace Qbg.IServices
         void DeleteUser(long id);
         User GetUser(string username);
         bool IsValid(string username, string password);
+        void AssignRole(User user, RoleEnum role);
     }
 }
