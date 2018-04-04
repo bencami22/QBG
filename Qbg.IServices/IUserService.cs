@@ -10,7 +10,7 @@ namespace Qbg.IServices
         IEnumerable<User> GetUsers();
         User GetUser(long id);
         User InsertUser(User user);
-        User UpdateUser(User user);
+        User UpdateUser(long id, User user);
         void DeleteUser(long id);
         User GetUser(string username);
         bool IsValid(string username, string password);

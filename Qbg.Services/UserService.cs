@@ -50,8 +50,13 @@ namespace Qbg.Services
             return this.GetUser(username)?.Password == securityService.Hash(password, "90a0b7426cff4fafb5b5223e51bcf6cc");
         }
 
-        public User UpdateUser(User user)
+        public User UpdateUser(long id, User user)
         {
+            var currentUser=GetUser(id);
+            currentUser.Email = user.Email;
+            currentUser.Password = securityService.Hash(user.Password, "90a0b7426cff4fafb5b5223e51bcf6cc");
+            currentUser.Username = user.Username;
+            currentUser.UserRoles = user.UserRoles;
             return userRepository.Update(user);
         }
     }

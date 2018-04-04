@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qbg.Webfront", "Qbg.Webfront\Qbg.Webfront.csproj", "{D1222A24-9F64-4F2F-9556-6DB60B943C8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qbg.Webfront", "Qbg.Webfront\Qbg.Webfront.csproj", "{D1222A24-9F64-4F2F-9556-6DB60B943C8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qbg.Data", "Qbg.Data\Qbg.Data.csproj", "{5EBE171E-B037-45AA-B934-42649A2B935D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qbg.Data", "Qbg.Data\Qbg.Data.csproj", "{5EBE171E-B037-45AA-B934-42649A2B935D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qbg.Services", "Qbg.Services\Qbg.Services.csproj", "{9452B56B-50F6-481B-A3F3-4F396597847B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qbg.Services", "Qbg.Services\Qbg.Services.csproj", "{9452B56B-50F6-481B-A3F3-4F396597847B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qbg.IServices", "Qbg.IServices\Qbg.IServices.csproj", "{D9D53904-9410-4670-A01F-338D97BEE0B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qbg.IServices", "Qbg.IServices\Qbg.IServices.csproj", "{D9D53904-9410-4670-A01F-338D97BEE0B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qbg.MySqlEfRepos", "Qbg.Repos\Qbg.MySqlEfRepos.csproj", "{ED0B112C-5010-4726-9EE8-4CC5E2499A03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qbg.MySqlEfRepos", "Qbg.Repos\Qbg.MySqlEfRepos.csproj", "{ED0B112C-5010-4726-9EE8-4CC5E2499A03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qbg.IRepos", "Qbg.IRepos\Qbg.IRepos.csproj", "{1BB74081-8388-4D73-B9D2-5A2194F2C51F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qbg.IRepos", "Qbg.IRepos\Qbg.IRepos.csproj", "{1BB74081-8388-4D73-B9D2-5A2194F2C51F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01- Fronts", "01- Fronts", "{B9398172-3314-43CD-AB2B-54B4E2FC32EE}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04- Data", "04- Data", "{29EDC85F-D75E-4034-A271-54852C892B41}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9D335F6B-97B7-471D-BBBB-8AE1E2E70759}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qbg.WebAPI", "..\WebAPI\Qbg.WebAPI.csproj", "{2FF4920C-A433-4391-8D05-731350056154}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{9D335F6B-97B7-471D-BBBB-8AE1E2E70759}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D335F6B-97B7-471D-BBBB-8AE1E2E70759}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D335F6B-97B7-471D-BBBB-8AE1E2E70759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF4920C-A433-4391-8D05-731350056154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF4920C-A433-4391-8D05-731350056154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF4920C-A433-4391-8D05-731350056154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF4920C-A433-4391-8D05-731350056154}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +76,9 @@ Global
 		{D9D53904-9410-4670-A01F-338D97BEE0B0} = {CAD08CA8-A56C-4C85-BACA-045F2EA22F18}
 		{ED0B112C-5010-4726-9EE8-4CC5E2499A03} = {D78A609C-8681-43EF-A428-0DCC220E3123}
 		{1BB74081-8388-4D73-B9D2-5A2194F2C51F} = {D78A609C-8681-43EF-A428-0DCC220E3123}
+		{2FF4920C-A433-4391-8D05-731350056154} = {B9398172-3314-43CD-AB2B-54B4E2FC32EE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1EDE15AB-C0D8-4D6D-9575-75EB9741E05D}
 	EndGlobalSection
 EndGlobal

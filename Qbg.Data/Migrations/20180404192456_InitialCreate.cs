@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Qbg.Data.Migrations
 {
-    public partial class _201706192236 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +27,7 @@ namespace Qbg.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    DateCreated = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2017, 6, 19, 20, 38, 26, 918, DateTimeKind.Utc)),
+                    DateCreated = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 4, 19, 24, 56, 654, DateTimeKind.Utc)),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: false),
                     Username = table.Column<string>(maxLength: 50, nullable: false)
