@@ -50,10 +50,7 @@ namespace Qbg.WebAPI.Controllers
         {
             if (userReq != null)
             {
-                User user = new User() { Username = userReq.Username, Email = userReq.Email, Password = userReq.Password };
-                userService.AssignRoleAsync(user, RoleEnum.Queuer);
-
-                userService.InsertUserAsync(user);
+                userService.InsertUserAsync(userReq.Username, userReq.Email, userReq.Password);
                 return StatusCode(StatusCodes.Status200OK);
             }
             else
@@ -69,7 +66,7 @@ namespace Qbg.WebAPI.Controllers
             if (userReq != null)
             {
                 User user = new User { Email = userReq.Email, Username = userReq.Username, Password = userReq.Password };
-                await userService.UpdateUserAsync(id, user);
+                await userService.UpdateUserAsync(id, userReq.Email, userReq.Username, userReq.Password);
                 return StatusCode(StatusCodes.Status200OK);
             }
             else
@@ -99,7 +96,7 @@ namespace Qbg.WebAPI.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+        public IActionResult Delete(long id)
         {
             userService.DeleteUserAsync(id);
             return StatusCode(StatusCodes.Status200OK);

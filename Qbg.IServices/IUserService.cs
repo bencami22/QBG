@@ -11,8 +11,8 @@ namespace Qbg.IServices
     {
         IQueryable<User> GetUsersAsync();
         Task<User> GetUserAsync(long id, bool includeRoles = false);
-        Task<User> InsertUserAsync(User user);
-        Task<User> UpdateUserAsync(long id, User user);
+        Task<User> InsertUserAsync(string username, string email, string password);
+        Task<User> UpdateUserAsync(long id, string email, string username, string password);
         void DeleteUserAsync(long id);
         Task<User> GetUserAsync(string username);
         Task<bool> IsValidAsync(string username, string password);

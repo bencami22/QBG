@@ -48,8 +48,11 @@ namespace Qbg.Services
             return userRepository.GetAll();
         }
 
-        public async Task<User> InsertUserAsync(User user)
+        public async Task<User> InsertUserAsync(string username, string email, string password)
         {
+            User user = new User() { Username = username, Email = email, Password = password };
+            AssignRoleAsync(user, RoleEnum.Queuer);
+            
             user.Password = securityService.Hash(user.Password, "90a0b7426cff4fafb5b5223e51bcf6cc");
             return await userRepository.InsertAsync(user);
         }
@@ -68,14 +71,14 @@ namespace Qbg.Services
             return (await this.GetUserAsync(username))?.Password == securityService.Hash(password, "90a0b7426cff4fafb5b5223e51bcf6cc");
         }
 
-        public async Task<User> UpdateUserAsync(long id, User user)
+        public async Task<User> UpdateUserAsync(long id, string email, string username, string password)
         {
             var currentUser = await GetUserAsync(id);
-            currentUser.Email = user.Email;
-            currentUser.Password = securityService.Hash(user.Password, "90a0b7426cff4fafb5b5223e51bcf6cc");
-            currentUser.Username = user.Username;
-            currentUser.UserRoles = user.UserRoles;
-            return await userRepository.UpdateAsync(user);
+            currentUser.Email = email;
+            currentUser.Password = securityService.Hash(password, "90a0b7426cff4fafb5b5223e51bcf6cc");
+            currentUser.Username = username;
+            currentUser.UserRoles = currentUser.UserRoles;
+            return await userRepository.UpdateAsync(currentUser);
         }
 
     }

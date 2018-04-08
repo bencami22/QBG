@@ -42,6 +42,7 @@ namespace WebAPI
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IQueueService, QueueService>();
             services.AddSingleton<ISecurityService, SecurityService>();
         }
 
