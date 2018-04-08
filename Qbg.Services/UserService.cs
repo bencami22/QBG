@@ -5,70 +5,78 @@ using System.Text;
 using Qbg.Data;
 using Qbg.IRepos;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace Qbg.Services
 {
     public class UserService : IUserService
     {
-        private IGenericRepository<User> userRepository;
+        private IUserRepository userRepository;
         private IGenericRepository<Role> roleRepository;
         private ISecurityService securityService;
 
-        public UserService(IGenericRepository<User> userRepo, IGenericRepository<Role> roleRepo, ISecurityService securityService)
+        public UserService(IUserRepository userRepo, IGenericRepository<Role> roleRepo, ISecurityService securityService)
         {
             this.userRepository = userRepo;
             this.securityService = securityService;
             this.roleRepository = roleRepo;
         }
 
-        public void DeleteUser(long id)
+        public async void DeleteUserAsync(long id)
         {
-            userRepository.Delete(this.GetUser(id));
+            userRepository.DeleteAsync(await this.GetUserAsync(id));
         }
 
-        public User GetUser(long id)
+        public async Task<User> GetUserAsync(long id, bool includeRoles = false)
         {
-            return userRepository.Get(id);
+            if (includeRoles)
+            {
+                return await userRepository.GetUserWithRolesAsync(id);
+            }
+            return await userRepository.GetAsync(id);
         }
 
-        public User GetUser(string username)
+        public async Task<User> GetUserAsync(string username)
         {
-            return userRepository.GetAll().FirstOrDefault(p => p.Username == username);
+            return await userRepository.GetAll().FirstOrDefaultAsync(p => p.Username == username);
         }
 
-        public IEnumerable<User> GetUsers()
+        public IQueryable<User> GetUsersAsync()
         {
             return userRepository.GetAll();
         }
 
-        public User InsertUser(User user)
+        public async Task<User> InsertUserAsync(User user)
         {
             user.Password = securityService.Hash(user.Password, "90a0b7426cff4fafb5b5223e51bcf6cc");
-            return userRepository.Insert(user);
+            return await userRepository.InsertAsync(user);
         }
 
-        public void AssignRole(User user, RoleEnum role)
+        public async void AssignRoleAsync(User user, RoleEnum role)
         {
             if (user.UserRoles == null)
             {
                 user.UserRoles = new List<UserRole>();
             }
-            user.UserRoles.Add(new UserRole(user, roleRepository.Get((long) role) ?? new Role(role)));            
+            user.UserRoles.Add(new UserRole(user, await roleRepository.GetAsync((long)role) ?? new Role(role)));
         }
 
-        public bool IsValid(string username, string password)
+        public async Task<bool> IsValidAsync(string username, string password)
         {
-            return this.GetUser(username)?.Password == securityService.Hash(password, "90a0b7426cff4fafb5b5223e51bcf6cc");
+            return (await this.GetUserAsync(username))?.Password == securityService.Hash(password, "90a0b7426cff4fafb5b5223e51bcf6cc");
         }
 
-        public User UpdateUser(long id, User user)
+        public async Task<User> UpdateUserAsync(long id, User user)
         {
-            var currentUser=GetUser(id);
+            var currentUser = await GetUserAsync(id);
             currentUser.Email = user.Email;
             currentUser.Password = securityService.Hash(user.Password, "90a0b7426cff4fafb5b5223e51bcf6cc");
             currentUser.Username = user.Username;
             currentUser.UserRoles = user.UserRoles;
-            return userRepository.Update(user);
+            return await userRepository.UpdateAsync(user);
         }
+
     }
 }

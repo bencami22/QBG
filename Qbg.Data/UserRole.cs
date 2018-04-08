@@ -7,6 +7,8 @@ namespace Qbg.Data
 {
     public class UserRole
     {
+        public UserRole() { }
+
         public UserRole(User user, Role role)
         {
             this.User = user;

@@ -6,24 +6,25 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Qbg.Data;
 using Qbg.Data.Bases;
+using System.Threading.Tasks;
 
 namespace Qbg.MySqlEfRepos
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        private readonly ApplicationContext context;
-        private DbSet<T> entities;
+        protected readonly ApplicationContext dbContext;
+        protected DbSet<T> entities;
         string errorMessage = string.Empty;
 
         public GenericRepository(ApplicationContext context)
         {
-            this.context = context;
+            this.dbContext = context;
             entities = context.Set<T>();
         }
 
-        public T Get(long id)
+        public async Task<T> GetAsync(long id)
         {
-            return entities.SingleOrDefault(s => s.Id == id);
+            return await entities.SingleOrDefaultAsync(s => s.Id == id);
         }
 
         public IQueryable<T> GetAll()
@@ -31,41 +32,41 @@ namespace Qbg.MySqlEfRepos
             return entities.AsQueryable<T>();
         }
 
-        public T Insert(T entity)
+        public async Task<T> InsertAsync(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
             entities.Add(entity);
-            context.SaveChanges();
+            await dbContext.SaveChangesAsync();
             
             return entity;
         }
 
-        public void SaveChanges()
+        public async void SaveChangesAsync()
         {
-            context.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
 
-        public T Update(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            context.SaveChanges();
+            await dbContext.SaveChangesAsync();
             return entity;
         }
 
-        public void Delete(T entity)
+        public async void DeleteAsync(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
             entities.Remove(entity);
-            context.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
     }
 }
