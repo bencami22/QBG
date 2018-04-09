@@ -12,6 +12,13 @@ namespace Qbg.Services
     public class QueueService : IQueueService
     {
         private IGenericRepository<QbgQueue> queueRepository;
+        private IUserService userService;
+
+        public QueueService(IGenericRepository<QbgQueue> queueRepository, IUserService userService)
+        {
+            this.queueRepository = queueRepository;
+            this.userService = userService;
+        }
 
         public async Task<QbgQueue> InsertQueueAsync()
         {
@@ -27,23 +34,27 @@ namespace Qbg.Services
         public async Task<User> DequeueAsync(long id)
         {
             var queue = await GetQueueAsync(id);
-            if (queue != null)
+            if ((queue?.Queue) != null)
             {
-                return queue.Queue?.Dequeue();
+                var userId = queue.Queue.Dequeue().UserId;
+                await queueRepository.UpdateAsync(queue);
+                return await userService.GetUserAsync(userId);
             }
             return null;
         }
 
-        public async Task<bool> EnqueueAsync(long id, User user)
+        public async Task<bool> EnqueueAsync(long id, string userName)
         {
+            var user = await userService.GetUserAsync(userName);
             var queue = await GetQueueAsync(id);
-            if (queue != null)
+            if (queue != null && user != null)
             {
                 if (queue.Queue == null)
                 {
-                    queue.Queue = new Queue<User>();
+                    queue.Queue = new Queue<QbgQueueUser>();
                 }
-                queue.Queue.Enqueue(user);
+                queue.Queue.Enqueue(new QbgQueueUser { QbgQueueId = id, UserId = user.Id });
+                await queueRepository.UpdateAsync(queue);
                 return true;
             }
             return false;

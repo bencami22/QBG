@@ -28,5 +28,7 @@ namespace Qbg.Data
         public DateTime DateCreated { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; }
+
+        public ICollection<QbgQueueUser> QbgQueues { get; set; }
     }
 }

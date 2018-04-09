@@ -12,6 +12,6 @@ namespace Qbg.Data
         }
 
         public DateTime TimeStamp { get; set; }
-        public Queue<User> Queue { get; set; }
+        public Queue<QbgQueueUser> Queue { get; set; }
     }
 }

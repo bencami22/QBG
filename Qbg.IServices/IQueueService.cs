@@ -12,7 +12,7 @@ namespace Qbg.IServices
         Task<QbgQueue> InsertQueueAsync();
         Task<QbgQueue> GetQueueAsync(long id);
         IQueryable<QbgQueue> GetAll();
-        Task<bool> EnqueueAsync(long id, User user);
+        Task<bool> EnqueueAsync(long id, string userName);
         Task<User> DequeueAsync(long id);
         void DeleteAsync(long id);
 

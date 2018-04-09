@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Qbg.IServices;
+using Qbg.WebAPI.Models.Queue.Request;
+using Qbg.WebAPI.Models.Queue.Response;
 
 namespace Qbg.WebAPI.Controllers
 {
@@ -11,36 +14,62 @@ namespace Qbg.WebAPI.Controllers
     [Route("api/Queue")]
     public class QueueController : Controller
     {
+        IQueueService queueService;
+        public QueueController(IQueueService queueService)
+        {
+            this.queueService = queueService;
+        }
+
         // GET: api/Queue
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<QueueGet> Get()
         {
-            return new string[] { "value1", "value2" };
+            return queueService.GetAll().Select(p => new QueueGet { Id = p.Id, TimeStamp = p.TimeStamp, Queue = (Queue<string>)p.Queue.Select(x => x.UserId.ToString()) });
         }
 
         // GET: api/Queue/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<QueueGet> Get(int id)
         {
-            return "value";
+            var qbgQueue = await queueService.GetQueueAsync(id);
+            if (qbgQueue != null)
+            {
+                return new QueueGet { Id = qbgQueue.Id, TimeStamp = qbgQueue.TimeStamp, Queue = (Queue<string>)qbgQueue.Queue?.Select(p => p.UserId.ToString()) };
+            }
+            return null;
         }
-        
+
         // POST: api/Queue
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post()
         {
+            queueService.InsertQueueAsync();
         }
-        
-        // PUT: api/Queue/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+
+        // POST: api/Queue
+        [HttpGet]
+        public async Task<string> Dequeue(long id)
         {
+            return (await queueService.DequeueAsync(id)).Username;
         }
-        
+
+        // POST: api/Queue
+        [HttpPost("Enqueue")]
+        public async Task<IActionResult> Enqueue([FromBody]QueueEnqueue enqueueReq)
+        {
+            var success=await queueService.EnqueueAsync(enqueueReq.Id, enqueueReq.UserName);
+            if(success)
+            {
+                return StatusCode(StatusCodes.Status200OK);
+            }
+            return StatusCode(StatusCodes.Status400BadRequest);
+        }
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            queueService.DeleteAsync(id);
         }
     }
 }

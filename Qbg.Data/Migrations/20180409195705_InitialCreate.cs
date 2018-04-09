@@ -9,10 +9,24 @@ namespace Qbg.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "QbgQueues",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySQL:AutoIncrement", true),
+                    TimeStamp = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 9, 19, 57, 5, 709, DateTimeKind.Utc))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QbgQueues", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySQL:AutoIncrement", true),
                     Description = table.Column<string>(maxLength: 100, nullable: true),
                     Name = table.Column<string>(maxLength: 100, nullable: false)
                 },
@@ -27,7 +41,7 @@ namespace Qbg.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    DateCreated = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 4, 19, 24, 56, 654, DateTimeKind.Utc)),
+                    DateCreated = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 9, 19, 57, 5, 705, DateTimeKind.Utc)),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: false),
                     Username = table.Column<string>(maxLength: 50, nullable: false)
@@ -35,6 +49,31 @@ namespace Qbg.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QbgQueueUser",
+                columns: table => new
+                {
+                    UserId = table.Column<long>(nullable: false),
+                    QbgQueueId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QbgQueueUser", x => new { x.UserId, x.QbgQueueId });
+                    table.UniqueConstraint("AK_QbgQueueUser_QbgQueueId_UserId", x => new { x.QbgQueueId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_QbgQueueUser_QbgQueues_QbgQueueId",
+                        column: x => x.QbgQueueId,
+                        principalTable: "QbgQueues",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_QbgQueueUser_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,7 +105,13 @@ namespace Qbg.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "QbgQueueUser");
+
+            migrationBuilder.DropTable(
                 name: "UserRole");
+
+            migrationBuilder.DropTable(
+                name: "QbgQueues");
 
             migrationBuilder.DropTable(
                 name: "Roles");

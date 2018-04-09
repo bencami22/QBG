@@ -19,6 +19,7 @@ namespace Qbg.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<QbgQueue> QbgQueues { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -28,6 +29,13 @@ namespace Qbg.Data
 
             builder.Entity<UserRole>().HasOne(ur => ur.User).WithMany(u => u.UserRoles).HasForeignKey(ur=>ur.UserId);
             builder.Entity<UserRole>().HasOne(ur => ur.Role).WithMany(u => u.UserRoles).HasForeignKey(ur => ur.RoleId);
+
+            builder.Entity<QbgQueue>().Property(p => p.TimeStamp).HasDefaultValue(DateTime.UtcNow);
+
+            builder.Entity<QbgQueueUser>().HasKey(ur => new { ur.UserId, ur.QbgQueueId});
+
+            builder.Entity<QbgQueueUser>().HasOne(qq => qq.QbgQueue).WithMany(u => u.Queue).HasForeignKey(ur => ur.QbgQueueId);
+            builder.Entity<QbgQueueUser>().HasOne(qq => qq.User).WithMany(u => u.QbgQueues).HasForeignKey(ur => ur.UserId);
 
             base.OnModelCreating(builder);
         }
