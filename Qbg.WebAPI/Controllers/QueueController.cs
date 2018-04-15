@@ -29,7 +29,7 @@ namespace Qbg.WebAPI.Controllers
 
         // GET: api/Queue/5
         [HttpGet("{id}")]
-        public async Task<QueueGet> Get(int id)
+        public async Task<QueueGet> Get(long id)
         {
             var qbgQueue = await queueService.GetQueueAsync(id);
             if (qbgQueue != null)
@@ -41,13 +41,13 @@ namespace Qbg.WebAPI.Controllers
 
         // POST: api/Queue
         [HttpPost]
-        public void Post()
+        public async Task<long> Post()
         {
-            queueService.InsertQueueAsync();
+            return (await queueService.InsertQueueAsync()).Id;
         }
 
         // POST: api/Queue
-        [HttpGet]
+        [HttpGet("Dequeue")]
         public async Task<string> Dequeue(long id)
         {
             return (await queueService.DequeueAsync(id)).Username;

@@ -25,5 +25,6 @@ namespace Qbg.Data
         [Key]
         public long UserId { get; set; }
         public User User { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 }

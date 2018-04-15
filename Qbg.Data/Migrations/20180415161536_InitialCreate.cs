@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
-using System.Collections.Generic;
 
 namespace Qbg.Data.Migrations
 {
@@ -14,7 +13,7 @@ namespace Qbg.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    TimeStamp = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 9, 19, 57, 5, 709, DateTimeKind.Utc))
+                    TimeStamp = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 15, 16, 15, 36, 202, DateTimeKind.Utc))
                 },
                 constraints: table =>
                 {
@@ -41,7 +40,7 @@ namespace Qbg.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    DateCreated = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 9, 19, 57, 5, 705, DateTimeKind.Utc)),
+                    DateCreated = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 15, 16, 15, 36, 199, DateTimeKind.Utc)),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: false),
                     Username = table.Column<string>(maxLength: 50, nullable: false)
@@ -56,7 +55,8 @@ namespace Qbg.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<long>(nullable: false),
-                    QbgQueueId = table.Column<long>(nullable: false)
+                    QbgQueueId = table.Column<long>(nullable: false),
+                    TimeStamp = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 15, 16, 15, 36, 203, DateTimeKind.Utc))
                 },
                 constraints: table =>
                 {

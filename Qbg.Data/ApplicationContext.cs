@@ -31,6 +31,7 @@ namespace Qbg.Data
             builder.Entity<UserRole>().HasOne(ur => ur.Role).WithMany(u => u.UserRoles).HasForeignKey(ur => ur.RoleId);
 
             builder.Entity<QbgQueue>().Property(p => p.TimeStamp).HasDefaultValue(DateTime.UtcNow);
+            builder.Entity<QbgQueueUser>().Property(p => p.TimeStamp).HasDefaultValue(DateTime.UtcNow);
 
             builder.Entity<QbgQueueUser>().HasKey(ur => new { ur.UserId, ur.QbgQueueId});
 

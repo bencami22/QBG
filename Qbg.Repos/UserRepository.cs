@@ -18,7 +18,6 @@ namespace Qbg.MySqlEfRepos
 
         public Task<User> GetUserWithRolesAsync(long id)
         {
-            Task.Delay(1000);
             return base.entities.Include(user => user.UserRoles).ThenInclude(userRole=>userRole.Role).SingleOrDefaultAsync(p=>p.Id==id);
         }
     }

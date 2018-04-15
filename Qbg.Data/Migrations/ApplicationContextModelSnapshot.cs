@@ -21,7 +21,7 @@ namespace Qbg.Data.Migrations
 
                     b.Property<DateTime>("TimeStamp")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 9, 19, 57, 5, 709, DateTimeKind.Utc));
+                        .HasDefaultValue(new DateTime(2018, 4, 15, 16, 15, 36, 202, DateTimeKind.Utc));
 
                     b.HasKey("Id");
 
@@ -33,6 +33,10 @@ namespace Qbg.Data.Migrations
                     b.Property<long>("UserId");
 
                     b.Property<long>("QbgQueueId");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(new DateTime(2018, 4, 15, 16, 15, 36, 203, DateTimeKind.Utc));
 
                     b.HasKey("UserId", "QbgQueueId");
 
@@ -65,7 +69,7 @@ namespace Qbg.Data.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 9, 19, 57, 5, 705, DateTimeKind.Utc));
+                        .HasDefaultValue(new DateTime(2018, 4, 15, 16, 15, 36, 199, DateTimeKind.Utc));
 
                     b.Property<string>("Email");
 

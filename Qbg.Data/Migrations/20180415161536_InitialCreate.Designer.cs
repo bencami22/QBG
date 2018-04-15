@@ -2,12 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Qbg.Data;
 using System;
 
 namespace Qbg.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20180409195705_InitialCreate")]
+    [Migration("20180415161536_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +24,7 @@ namespace Qbg.Data.Migrations
 
                     b.Property<DateTime>("TimeStamp")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 9, 19, 57, 5, 709, DateTimeKind.Utc));
+                        .HasDefaultValue(new DateTime(2018, 4, 15, 16, 15, 36, 202, DateTimeKind.Utc));
 
                     b.HasKey("Id");
 
@@ -35,6 +36,10 @@ namespace Qbg.Data.Migrations
                     b.Property<long>("UserId");
 
                     b.Property<long>("QbgQueueId");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(new DateTime(2018, 4, 15, 16, 15, 36, 203, DateTimeKind.Utc));
 
                     b.HasKey("UserId", "QbgQueueId");
 
@@ -67,7 +72,7 @@ namespace Qbg.Data.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 4, 9, 19, 57, 5, 705, DateTimeKind.Utc));
+                        .HasDefaultValue(new DateTime(2018, 4, 15, 16, 15, 36, 199, DateTimeKind.Utc));
 
                     b.Property<string>("Email");
 
