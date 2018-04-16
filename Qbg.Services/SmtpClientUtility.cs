@@ -19,46 +19,50 @@ namespace Qbg.Services
 
         public async Task<bool> SendMail(string subject, string htmlBody, string from, List<string> to, List<string> cc = null, List<string> bcc = null)
         {
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.IsBodyHtml = true;
-            mailMessage.From = new MailAddress(from);
-            mailMessage.Body = htmlBody;
-            mailMessage.Subject = subject;
+            using (MailMessage mailMessage = new MailMessage())
+            {
+                mailMessage.IsBodyHtml = true;
+                mailMessage.From = new MailAddress(from);
+                mailMessage.Body = htmlBody;
+                mailMessage.Subject = subject;
 
-            if (to?.Count > 0)
-            {
-                foreach (string address in to)
+                if (to?.Count > 0)
                 {
-                    mailMessage.To.Add(new MailAddress(address));
+                    foreach (string address in to)
+                    {
+                        mailMessage.To.Add(new MailAddress(address));
+                    }
                 }
-            }
-            if (bcc?.Count > 0)
-            {
-                foreach (string address in bcc)
+                if (bcc?.Count > 0)
                 {
-                    mailMessage.Bcc.Add(new MailAddress(address));
+                    foreach (string address in bcc)
+                    {
+                        mailMessage.Bcc.Add(new MailAddress(address));
+                    }
                 }
-            }
-            if (cc?.Count > 0)
-            {
-                foreach (string address in cc)
+                if (cc?.Count > 0)
                 {
-                    mailMessage.CC.Add(new MailAddress(address));
+                    foreach (string address in cc)
+                    {
+                        mailMessage.CC.Add(new MailAddress(address));
+                    }
                 }
-            }
 
-            SmtpClient client = new SmtpClient(Configuration["MailSettings:Server"], Convert.ToInt32(Configuration["MailSettings:Port"]));
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential(Configuration["MailSettings:Username"], Configuration["MailSettings:Password"]);
+                using (SmtpClient client = new SmtpClient(Configuration["MailSettings:Server"], Convert.ToInt32(Configuration["MailSettings:Port"])))
+                {
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.UseDefaultCredentials = false;
+                    client.Credentials = new System.Net.NetworkCredential(Configuration["MailSettings:Username"], Configuration["MailSettings:Password"]);
 
-            try
-            {
-                //await client.SendMailAsync(mailMessage,);
-            }
-            catch(Exception ex)
-            {
-                return false;
+                    try
+                    {
+                        await client.SendMailAsync(mailMessage);
+                    }
+                    catch (Exception ex)
+                    {
+                        return false;
+                    }
+                }
             }
             return true;
         }
