@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Qbg.IServices;
 using Qbg.WebAPI.Models.Queue.Request;
 using Qbg.WebAPI.Models.Queue.Response;
@@ -15,9 +17,14 @@ namespace Qbg.WebAPI.Controllers
     public class QueueController : Controller
     {
         IQueueService queueService;
-        public QueueController(IQueueService queueService)
+        IMailUtility mailUtility;
+        IConfiguration configuration;
+
+        public QueueController(IQueueService queueService, IMailUtility mailUtility, IConfiguration configuration)
         {
             this.queueService = queueService;
+            this.mailUtility = mailUtility;
+            this.configuration = configuration;
         }
 
         // GET: api/Queue

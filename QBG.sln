@@ -25,6 +25,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qbg.WebAPI", "Qbg.WebAPI\Qbg.WebAPI.csproj", "{8C36A03C-372E-48D2-89A8-B5FFCA205922}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qbg.WebApp", "..\Qbg.WebApp\Qbg.WebApp.csproj", "{8A7515AC-5DAB-4FEF-8211-547D30628F45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{8C36A03C-372E-48D2-89A8-B5FFCA205922}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C36A03C-372E-48D2-89A8-B5FFCA205922}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C36A03C-372E-48D2-89A8-B5FFCA205922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A7515AC-5DAB-4FEF-8211-547D30628F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A7515AC-5DAB-4FEF-8211-547D30628F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A7515AC-5DAB-4FEF-8211-547D30628F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A7515AC-5DAB-4FEF-8211-547D30628F45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{ED0B112C-5010-4726-9EE8-4CC5E2499A03} = {D78A609C-8681-43EF-A428-0DCC220E3123}
 		{1BB74081-8388-4D73-B9D2-5A2194F2C51F} = {D78A609C-8681-43EF-A428-0DCC220E3123}
 		{8C36A03C-372E-48D2-89A8-B5FFCA205922} = {B9398172-3314-43CD-AB2B-54B4E2FC32EE}
+		{8A7515AC-5DAB-4FEF-8211-547D30628F45} = {B9398172-3314-43CD-AB2B-54B4E2FC32EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1EDE15AB-C0D8-4D6D-9575-75EB9741E05D}
