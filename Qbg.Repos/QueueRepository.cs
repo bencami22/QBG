@@ -17,7 +17,13 @@ namespace Qbg.MySqlEfRepos
        
         public Task<QbgQueue> GetQbgQueueAsync(long id)
         {
-            return base.entities.Include(queue => queue.Queue).SingleOrDefaultAsync(p => p.Id == id);
+            var temp= base.entities
+                .Include(p=>p.Queue)
+                .ThenInclude(u=>u.User)
+                
+                .SingleOrDefaultAsync(p => p.Id == id);
+            return temp;
+               
         }
     }
 }

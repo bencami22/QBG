@@ -31,19 +31,31 @@ namespace Qbg.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<QueueGet> Get()
         {
-            return queueService.GetAll().Select(p => new QueueGet { Id = p.Id, TimeStamp = p.TimeStamp, Queue = (Queue<string>)p.Queue.Select(x => x.UserId.ToString()) });
+            var temp =queueService.GetAll().Select(p =>
+            new QueueGet
+            {
+                Id = p.Id,
+                TimeStamp = p.TimeStamp,
+                Queue =  (List<QueueEntry>)p.Queue.Select(x => new QueueEntry { Username = x.User.Username.ToString(), TimeStamp = x.TimeStamp }).ToList()
+            });
+            return temp;
         }
 
         // GET: api/Queue/5
         [HttpGet("{id}")]
-        public async Task<QueueGet> Get(long id)
+        public async Task<IActionResult> Get(long id)
         {
             var qbgQueue = await queueService.GetQueueAsync(id);
             if (qbgQueue != null)
             {
-                return new QueueGet { Id = qbgQueue.Id, TimeStamp = qbgQueue.TimeStamp, Queue = (Queue<string>)qbgQueue.Queue?.Select(p => p.UserId.ToString()) };
+                return Ok(new QueueGet
+                {
+                    Id = qbgQueue.Id,
+                    TimeStamp = qbgQueue.TimeStamp,
+                 //   Queue = (List<QueueEntry>)qbgQueue.Queue.Select(x => new QueueEntry() { Username = x.User.Username.ToString(), TimeStamp = x.TimeStamp }).ToList()
+                });
             }
-            return null;
+            return StatusCode(StatusCodes.Status400BadRequest);
         }
 
         // POST: api/Queue
@@ -64,8 +76,8 @@ namespace Qbg.WebAPI.Controllers
         [HttpPost("Enqueue")]
         public async Task<IActionResult> Enqueue([FromBody]QueueEnqueue enqueueReq)
         {
-            var success=await queueService.EnqueueAsync(enqueueReq.Id, enqueueReq.UserName);
-            if(success)
+            var success = await queueService.EnqueueAsync(enqueueReq.Id, enqueueReq.UserName);
+            if (success)
             {
                 return StatusCode(StatusCodes.Status200OK);
             }

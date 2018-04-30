@@ -1,0 +1,21 @@
+<h1>Queues</h1>
+
+<p>See all available queues:</p>
+
+<p *ngIf="!queueGet"><em>Loading...</em></p>
+<table class='table' *ngIf="queueGet">
+  <thead>
+    <tr>
+      <th>Identifier</th>
+      <th>Commencement</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="ng-scope">
+    <tr *ngFor="let queue of queueGet">
+      <td>{{ queue.id }}</td>
+      <td>{{ queue.timeStamp }}</td>
+      <td><button style="font-size: 11px;" type="button" class="btn btn-primary" ng-click="$location.path('/queue/'+queue.id)" >Select</button></td>
+    </tr>
+  </tbody>
+</table>

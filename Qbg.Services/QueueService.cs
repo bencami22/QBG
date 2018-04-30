@@ -55,7 +55,7 @@ namespace Qbg.Services
                 {
                     queue.Queue = new List<QbgQueueUser>();
                 }
-                queue.Queue.Add(new QbgQueueUser { QbgQueueId = id, UserId = user.Id });
+                queue.Queue.Add(new QbgQueueUser { QbgQueueId = id, QbgQueue = queue, UserId = user.Id, User = user });
                 await queueRepository.UpdateAsync(queue);
                 return true;
             }

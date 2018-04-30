@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Qbg.WebAPI.Models.Queue.Response
+namespace Qbg.ngWebApp.Models.Queue.Response
 {
     public struct QueueGet
     {
