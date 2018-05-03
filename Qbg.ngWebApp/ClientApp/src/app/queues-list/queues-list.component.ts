@@ -4,10 +4,10 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 
 @Component({
-  selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  selector: 'app-queues-list',
+  templateUrl: './queues-list.component.html'
 })
-export class FetchDataComponent {
+export class QueuesListComponent {
   public queueGet: QueueGet[]
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {

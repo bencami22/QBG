@@ -1,0 +1,20 @@
+<h1>Queue Id: {{queue.id}}</h1>
+
+<p>Current:{{current}}</p>
+
+<p *ngIf="!queueEntries"><em>Loading...</em></p>
+<table class='table' *ngIf="queueEntries">
+  <thead>
+    <tr>
+      <th>Username:</th>
+      <th>Entered on:</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let queueEntry of queueEntries">
+      <td>{{ queueEntry.Username }}</td>
+      <td>{{ queue.timeStamp }}</td>
+    </tr>
+  </tbody>
+</table>

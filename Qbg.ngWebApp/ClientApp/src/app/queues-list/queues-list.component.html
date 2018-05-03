@@ -11,11 +11,11 @@
       <th></th>
     </tr>
   </thead>
-  <tbody class="ng-scope">
+  <tbody>
     <tr *ngFor="let queue of queueGet">
       <td>{{ queue.id }}</td>
       <td>{{ queue.timeStamp }}</td>
-      <td><button style="font-size: 11px;" type="button" class="btn btn-primary" ng-click="$location.path('/queue/'+queue.id)" >Select</button></td>
+      <td><button style="font-size: 11px;" type="button" class="btn btn-primary" ng-click="this.router.navigateByUrl('/user');" >Select</button></td>
     </tr>
   </tbody>
 </table>
