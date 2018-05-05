@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs/Observable";
+
+import { QueueService } from '../queue.service';
+import { QueueGet } from '../QueueGet';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -8,27 +9,15 @@ import 'rxjs/add/operator/map';
   templateUrl: './queues-list.component.html'
 })
 export class QueuesListComponent {
-  public queueGet: QueueGet[]
+  public queueGet: QueueGet[];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<QueueGet[]>(baseUrl + 'api/queue')        
-      .subscribe(result => {        
-      console.log(result);
-      this.queueGet = result;
-    },
-      error => {
-        console.error(error)
-      });
+  constructor(private queueService: QueueService) { }
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnInit() {
+    this.queueService.getQueues()
+      .subscribe(result => { this.queueGet = result; },
+        error => { console.error(error); }
+      );
   }
-}
-
-interface QueueGet {
-  id: number;
-  timeStamp: string;
-  queue: QueueEntry[];
-}
-
-interface QueueEntry {
-  username: string;
-  timeStamp: string;
 }

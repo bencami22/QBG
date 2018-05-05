@@ -1,8 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { QueueGet } from './QueueGet';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class QueueService {
 
-  constructor() { }
+  private baseUrl: string;
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    this.baseUrl = baseUrl;
+  }
 
+  getQueues(): Observable<QueueGet[]> {
+    this.http.get<QueueGet[]>(this.baseUrl + 'api/queue')
+      .subscribe(result => {
+        console.log(result);
+        return result;
+      },
+        error => {
+          console.error(error);
+          return null;
+        });
+
+    return null;
+  }
 }
