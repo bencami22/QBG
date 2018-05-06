@@ -9,6 +9,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { QueuesListComponent } from './queues-list/queues-list.component';
+import { QueuesViewComponent } from './queues-view/queues-view.component';
+import { QueueService } from './queue.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { QueuesListComponent } from './queues-list/queues-list.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'queues-list', component: QueuesListComponent },
+      {path: 'queue', component: QueuesViewComponent}
     ])
   ],
   providers: [],

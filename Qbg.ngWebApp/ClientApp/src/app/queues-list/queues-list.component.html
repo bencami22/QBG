@@ -15,7 +15,9 @@
     <tr *ngFor="let queue of queueGet">
       <td>{{ queue.id }}</td>
       <td>{{ queue.timeStamp }}</td>
-      <td><button style="font-size: 11px;" type="button" class="btn btn-primary" ng-click="this.router.navigateByUrl('/user');" >Select</button></td>
+      <td>
+          <a routerLink="/heroes" class="btn btn-primary">Select</a>
+      </td>
     </tr>
   </tbody>
 </table>

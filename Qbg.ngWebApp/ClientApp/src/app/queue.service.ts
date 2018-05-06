@@ -12,16 +12,6 @@ export class QueueService {
   }
 
   getQueues(): Observable<QueueGet[]> {
-    this.http.get<QueueGet[]>(this.baseUrl + 'api/queue')
-      .subscribe(result => {
-        console.log(result);
-        return result;
-      },
-        error => {
-          console.error(error);
-          return null;
-        });
-
-    return null;
+    return this.http.get<QueueGet[]>(this.baseUrl + 'api/queue');
   }
 }

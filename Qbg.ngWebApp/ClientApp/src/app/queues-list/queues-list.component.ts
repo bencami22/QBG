@@ -6,7 +6,8 @@ import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-queues-list',
-  templateUrl: './queues-list.component.html'
+  templateUrl: './queues-list.component.html',
+  providers: [QueueService]
 })
 export class QueuesListComponent {
   public queueGet: QueueGet[];
