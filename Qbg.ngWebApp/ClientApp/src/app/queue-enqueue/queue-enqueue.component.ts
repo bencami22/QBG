@@ -16,10 +16,10 @@ export class QueueEnqueueComponent implements OnInit {
   }
 
   add(username: string) {
-    this.queueService.addQueue(this.queueId, username)
-    .subscribe(result => 
-      console.log(result),
-    error => { 
+    this.queueService.enqueue(this.queueId, username)
+    .subscribe(result =>
+      console.log('successfully enqueued ' + username),
+    error => {
       console.error(error); });
     }
 }

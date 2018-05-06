@@ -52,7 +52,7 @@ namespace Qbg.WebAPI.Controllers
                 {
                     Id = qbgQueue.Id,
                     TimeStamp = qbgQueue.TimeStamp,
-                 //   Queue = (List<QueueEntry>)qbgQueue.Queue.Select(x => new QueueEntry() { Username = x.User.Username.ToString(), TimeStamp = x.TimeStamp }).ToList()
+                    Queue = (List<QueueEntry>)qbgQueue.Queue.Select(x => new QueueEntry() { Username = x.User.Username.ToString(), TimeStamp = x.TimeStamp }).ToList()
                 });
             }
             return StatusCode(StatusCodes.Status400BadRequest);
@@ -66,7 +66,7 @@ namespace Qbg.WebAPI.Controllers
         }
 
         // POST: api/Queue
-        [HttpGet("Dequeue")]
+        [HttpPost("Dequeue")]
         public async Task<string> Dequeue(long id)
         {
             return (await queueService.DequeueAsync(id)).Username;

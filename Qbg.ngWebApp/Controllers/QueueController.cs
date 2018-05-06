@@ -45,10 +45,17 @@ namespace Qbg.ngWebApp.Controllers
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = await client.PostAsync($"{url}/api/queue/Enqueue", byteContent);
-            response.EnsureSuccessStatusCode();
             return StatusCode(response.StatusCode);
         }
 
+
+        [HttpPost("Dequeue")]
+        public async Task<IActionResult> Dequeue(long id)
+        {
+            var response = await client.PostAsync($"{url}/api/queue/Dequeue?id={id}", null);
+            return StatusCode(response.StatusCode);
+        }
+        
         // POST: api/Queue
         [HttpPost]
         public void Post([FromBody]string value)

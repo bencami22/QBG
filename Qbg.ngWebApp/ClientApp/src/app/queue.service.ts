@@ -19,9 +19,12 @@ export class QueueService {
     return this.http.get<QueueGet>(this.baseUrl + 'api/queue/' + id);
   }
 
-  addQueue(queueId: number, username: string) {
-
-    let body = {Id: queueId , UserName: username };
+  enqueue(queueId: number, username: string) {
+    const body = {Id: queueId , UserName: username };
     return this.http.post(this.baseUrl + 'api/queue/enqueue', body);
+  }
+
+  dequeue(id: number) {
+    return this.http.post(this.baseUrl + 'api/queue/dequeue?id=' + id, null);
   }
 }

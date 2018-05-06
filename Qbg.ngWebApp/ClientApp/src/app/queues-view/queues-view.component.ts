@@ -12,7 +12,7 @@ import {QueueEnqueueComponent} from '../queue-enqueue/queue-enqueue.component';
 })
 export class QueuesViewComponent {
 
-  private queue: QueueGet;
+  private queueGet: QueueGet;
   private current: string;
 
   constructor(private route: ActivatedRoute,
@@ -27,9 +27,22 @@ export class QueuesViewComponent {
     const id = +this.route.snapshot.paramMap.get('id');
     this.queueService.getQueue(id)
       .subscribe(queue => {
-      this.queue = queue;
+      this.queueGet = queue;
       if (queue.queue) {
-        this.current = this.queue.queue[0].username;
+        this.current = queue.queue[0].username;
+      }
+      });
+  }
+
+  dequeue(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.queueService.dequeue(id).subscribe(result => {  },
+      error => { console.error(error); });
+    this.queueService.getQueue(id)
+      .subscribe(queue => {
+      this.queueGet = queue;
+      if (queue.queue) {
+        this.current = queue.queue[0].username;
       }
       });
   }

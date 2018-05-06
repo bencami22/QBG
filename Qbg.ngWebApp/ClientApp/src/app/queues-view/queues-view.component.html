@@ -1,14 +1,14 @@
-<p *ngIf="!queue"><em>Loading...</em></p>
-<div *ngIf="queue">
-    <h1>Queue Id: {{queue.id}}</h1>
+<p *ngIf="!queueGet"><em>Loading...</em></p>
+<div *ngIf="queueGet">
+    <h1>Queue Id: {{queueGet.id}}</h1>
 
-    <app-queue-enqueue [queueId]=queue.id></app-queue-enqueue>
+    <app-queue-enqueue [queueId]=queueGet.id></app-queue-enqueue>
 
+    <button (click)="dequeue();">Dequeue</button>
 
-    <p *ngIf="!queueEntries"><em>No entries in queue</em></p>
-    <div *ngIf="queueEntries">
+    <p *ngIf="!queueGet.queue"><em>No entries in queue</em></p>
+    <div *ngIf="queueGet">
         <p>Current:{{current}}</p>
-
         <table class='table'>
             <thead>
               <tr>
@@ -18,9 +18,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let queueEntry of queueEntries">
-                <td>{{ queueEntry.Username }}</td>
-                <td>{{ queue.timeStamp }}</td>
+              <tr *ngFor="let queueEntry of queueGet.queue">
+                <td>{{ queueEntry.username }}</td>
+                <td>{{ queueEntry.timeStamp }}</td>
               </tr>
             </tbody>
           </table>
