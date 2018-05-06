@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { QueuesListComponent } from './queues-list/queues-list.component';
 import { QueuesViewComponent } from './queues-view/queues-view.component';
 import { QueueService } from './queue.service';
+import { QueueEnqueueComponent } from './queue-enqueue/queue-enqueue.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { QueueService } from './queue.service';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    QueuesListComponent
+    QueuesListComponent,
+    QueuesViewComponent,
+    QueueEnqueueComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,7 +31,7 @@ import { QueueService } from './queue.service';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'queues-list', component: QueuesListComponent },
-      {path: 'queue', component: QueuesViewComponent}
+      { path: 'queue/:id', component: QueuesViewComponent}
     ])
   ],
   providers: [],

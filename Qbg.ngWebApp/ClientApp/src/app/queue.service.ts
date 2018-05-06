@@ -14,4 +14,14 @@ export class QueueService {
   getQueues(): Observable<QueueGet[]> {
     return this.http.get<QueueGet[]>(this.baseUrl + 'api/queue');
   }
+
+  getQueue(id: number): Observable<QueueGet> {
+    return this.http.get<QueueGet>(this.baseUrl + 'api/queue/' + id);
+  }
+
+  addQueue(queueId: number, username: string) {
+
+    let body = {Id: queueId , UserName: username };
+    return this.http.post(this.baseUrl + 'api/queue/enqueue', body);
+  }
 }

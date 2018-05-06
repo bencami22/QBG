@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Qbg.ngWebApp.Models.Queue.Request;
 using Qbg.ngWebApp.Models.Queue.Response;
 
 namespace Qbg.ngWebApp.Controllers
@@ -34,6 +36,17 @@ namespace Qbg.ngWebApp.Controllers
             var response = await client.GetAsync($"{url}/api/queue/{id}");
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<QueueGet>(await response.Content.ReadAsStringAsync());
+        }
+
+        [HttpPost("Enqueue")]
+        public async Task<IActionResult> Enqueue([FromBody]QueueEnqueue enqueueReq)
+        {
+            var buffer = System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(enqueueReq));
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await client.PostAsync($"{url}/api/queue/Enqueue", byteContent);
+            response.EnsureSuccessStatusCode();
+            return StatusCode(response.StatusCode);
         }
 
         // POST: api/Queue
