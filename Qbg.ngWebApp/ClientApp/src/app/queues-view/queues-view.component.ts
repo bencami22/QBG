@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { QueueService } from '../queue.service';
 import { QueueGet } from '../QueueGet';
-import {QueueEnqueueComponent} from '../queue-enqueue/queue-enqueue.component';
+import { QueueEnqueueComponent } from '../queue-enqueue/queue-enqueue.component';
 
 @Component({
   selector: 'app-queues-view',
@@ -27,23 +27,25 @@ export class QueuesViewComponent {
     const id = +this.route.snapshot.paramMap.get('id');
     this.queueService.getQueue(id)
       .subscribe(queue => {
-      this.queueGet = queue;
-      if (queue.queue) {
-        this.current = queue.queue[0].username;
-      }
+        this.queueGet = queue;
+        if (queue.queue && queue.queue.length > 0) {
+          this.current = queue.queue[0].username;
+        }
       });
   }
 
   dequeue(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.queueService.dequeue(id).subscribe(result => {  },
-      error => { console.error(error); });
-    this.queueService.getQueue(id)
+    this.queueService.dequeue(id).subscribe(result => {
+      this.queueService.getQueue(id)
       .subscribe(queue => {
-      this.queueGet = queue;
-      if (queue.queue) {
-        this.current = queue.queue[0].username;
-      }
+        this.queueGet = queue;
+        if (queue.queue) {
+          this.current = queue.queue[0].username;
+        }
       });
+    },
+      error => { console.error(error); });
+
   }
 }

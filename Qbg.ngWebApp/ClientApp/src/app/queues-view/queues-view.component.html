@@ -2,12 +2,12 @@
 <div *ngIf="queueGet">
     <h1>Queue Id: {{queueGet.id}}</h1>
 
-    <app-queue-enqueue [queueId]=queueGet.id></app-queue-enqueue>
+    <app-queue-enqueue [queueId]=queueGet.id [current]=current [queueGet]=queueGet></app-queue-enqueue>
 
     <button (click)="dequeue();">Dequeue</button>
 
-    <p *ngIf="!queueGet.queue"><em>No entries in queue</em></p>
-    <div *ngIf="queueGet">
+    <p *ngIf="!queueGet.queue || queueGet.queue.length==0"><em>No entries in queue</em></p>
+    <div *ngIf="queueGet && queueGet.queue && queueGet.queue.length>0">
         <p>Current:{{current}}</p>
         <table class='table'>
             <thead>
