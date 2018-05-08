@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { QueueService } from '../queue.service';
 import { QueueGet } from '../QueueGet';
-import { EventEmitter } from 'events';
 
 
 @Component({
@@ -14,8 +13,8 @@ export class QueueEnqueueComponent implements OnInit {
   @Input() queueId: number;
   @Input() queueGet: QueueGet;
   @Input() current: string;
-  @Output() queueGetChange: EventEmitter = new EventEmitter();
-  @Output() currentVarChange: EventEmitter = new EventEmitter();
+  @Output() enqueueSuccess = new EventEmitter<string>();
+
   constructor(private queueService: QueueService) { }
 
   ngOnInit() {
@@ -25,13 +24,7 @@ export class QueueEnqueueComponent implements OnInit {
     this.queueService.enqueue(this.queueId, username)
       .subscribe(result => {
         console.log('successfully enqueued ' + username);
-        this.queueService.getQueue(this.queueId)
-          .subscribe(queue => {
-            this.queueGet = queue;
-            if (queue.queue) {
-              this.current = queue.queue[0].username;
-            }
-          });
+        this.enqueueSuccess.emit(username);
       },
         error => {
           console.error(error);

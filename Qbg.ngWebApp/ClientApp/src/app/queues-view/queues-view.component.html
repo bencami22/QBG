@@ -2,7 +2,7 @@
 <div *ngIf="queueGet">
     <h1>Queue Id: {{queueGet.id}}</h1>
 
-    <app-queue-enqueue [queueId]=queueGet.id [current]=current [queueGet]=queueGet></app-queue-enqueue>
+    <app-queue-enqueue [queueId]=queueGet.id (enqueueSuccess)=enqueueSuccess($event)></app-queue-enqueue>
 
     <button (click)="dequeue();">Dequeue</button>
 
