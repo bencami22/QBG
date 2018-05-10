@@ -23,15 +23,15 @@ namespace Qbg.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<User>().Property(p => p.DateCreated).HasDefaultValue(DateTime.UtcNow);
+            builder.Entity<User>().Property(p => p.DateCreated).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId});
 
             builder.Entity<UserRole>().HasOne(ur => ur.User).WithMany(u => u.UserRoles).HasForeignKey(ur=>ur.UserId);
             builder.Entity<UserRole>().HasOne(ur => ur.Role).WithMany(u => u.UserRoles).HasForeignKey(ur => ur.RoleId);
 
-            builder.Entity<QbgQueue>().Property(p => p.TimeStamp).HasDefaultValue(DateTime.UtcNow);
-            builder.Entity<QbgQueueUser>().Property(p => p.TimeStamp).HasDefaultValue(DateTime.UtcNow);
+            builder.Entity<QbgQueue>().Property(p => p.TimeStamp).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Entity<QbgQueueUser>().Property(p => p.TimeStamp).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Entity<QbgQueueUser>().HasKey(ur => new { ur.UserId, ur.QbgQueueId});
 

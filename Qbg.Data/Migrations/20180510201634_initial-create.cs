@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
+using System.Collections.Generic;
 
 namespace Qbg.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +14,7 @@ namespace Qbg.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    TimeStamp = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 15, 16, 15, 36, 202, DateTimeKind.Utc))
+                    TimeStamp = table.Column<DateTime>(nullable: false, defaultValueSql: "UTC_TIMESTAMP()")
                 },
                 constraints: table =>
                 {
@@ -40,7 +41,7 @@ namespace Qbg.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    DateCreated = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 15, 16, 15, 36, 199, DateTimeKind.Utc)),
+                    DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "UTC_TIMESTAMP()"),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: false),
                     Username = table.Column<string>(maxLength: 50, nullable: false)
@@ -56,7 +57,7 @@ namespace Qbg.Data.Migrations
                 {
                     UserId = table.Column<long>(nullable: false),
                     QbgQueueId = table.Column<long>(nullable: false),
-                    TimeStamp = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2018, 4, 15, 16, 15, 36, 203, DateTimeKind.Utc))
+                    TimeStamp = table.Column<DateTime>(nullable: false, defaultValueSql: "UTC_TIMESTAMP()")
                 },
                 constraints: table =>
                 {
