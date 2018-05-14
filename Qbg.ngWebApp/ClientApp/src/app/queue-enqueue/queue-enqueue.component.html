@@ -1,7 +1,7 @@
 <div>
-    <label>Username:
-      <input #username />
+    <label>
+      <input class="form-control" placeholder="Username" #username />
     </label>
     <!-- (click) passes input value to add() and then clears the input -->
-    <button (click)="add(username.value); username.value=''">Enqueue</button>
+    <button (click)="add(username.value); username.value=''" class="btn btn-primary">Enqueue</button>
   </div>

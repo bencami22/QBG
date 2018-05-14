@@ -4,23 +4,24 @@
 
     <app-queue-enqueue [queueId]=queueGet.id (enqueueSuccess)=enqueueSuccess($event)></app-queue-enqueue>
 
-    <button (click)="dequeue();">Dequeue</button>
+    
 
     <p *ngIf="!queueGet.queue || queueGet.queue.length==0"><em>No entries in queue</em></p>
     <div *ngIf="queueGet && queueGet.queue && queueGet.queue.length>0">
-        <p>Current:{{current}}</p>
-        <table class='table'>
+      <h2 class="display-1">Current: {{current}}   <button (click)="dequeue();" class="btn btn-primary">Dequeue</button></h2> 
+      <h3>List of queuers</h3>  
+      <table class="table">
             <thead>
               <tr>
-                <th>Username:</th>
-                <th>Entered on:</th>
+                <th scope="col">Username</th>
+                <th scope="col">Entered on</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let queueEntry of queueGet.queue">
                 <td>{{ queueEntry.username }}</td>
-                <td>{{ queueEntry.timeStamp }}</td>
+                <td>{{ queueEntry.timeStamp | date :"MMM d, y h:mm:ss a" }}</td>
               </tr>
             </tbody>
           </table>

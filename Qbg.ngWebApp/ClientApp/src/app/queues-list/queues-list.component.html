@@ -14,7 +14,7 @@
   <tbody>
     <tr *ngFor="let queue of queueGet">
       <td>{{ queue.id }}</td>
-      <td>{{ queue.timeStamp }}</td>
+      <td>{{ queue.timeStamp | date :"MMM d, y h:mm:ss a"}}</td>
       <td>
           <a routerLink="/queue/{{queue.id}}" class="btn btn-primary">Select</a>
       </td>
