@@ -34,13 +34,14 @@ namespace Qbg.Services
         public async Task<User> DequeueAsync(long id)
         {
             var queue = await GetQueueAsync(id);
-            if ((queue?.Queue) != null)
+            if ((queue?.Queue) != null && queue.Queue.Any())
             {
-                var toBeRemoved = queue.Queue.OrderByDescending(p => p.TimeStamp).Take(1).SingleOrDefault();
-                var userId = toBeRemoved.UserId;
-                queue.Queue.Remove(toBeRemoved);
+                queue.Queue.Remove(queue.Queue.OrderBy(p => p.TimeStamp).Take(1).SingleOrDefault());
                 await queueRepository.UpdateAsync(queue);
-                return await userService.GetUserAsync(userId);
+                if (queue.Queue.Any())
+                {
+                    return await userService.GetUserAsync(queue.Queue.OrderBy(p => p.TimeStamp).Take(1).SingleOrDefault().UserId);
+                }
             }
             return null;
         }

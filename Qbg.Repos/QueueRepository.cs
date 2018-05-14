@@ -19,8 +19,7 @@ namespace Qbg.MySqlEfRepos
         {
             var temp= base.entities
                 .Include(p=>p.Queue)
-                .ThenInclude(u=>u.User)
-                
+                .ThenInclude(u=>u.User)                
                 .SingleOrDefaultAsync(p => p.Id == id);
             return temp;
                
