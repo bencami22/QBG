@@ -60,17 +60,11 @@ namespace Qbg.WebAPI.Controllers
 
         // POST: api/Queue
         [HttpPost]
-        public async Task<long> Post()
-        {
-            return (await queueService.InsertQueueAsync()).Id;
-        }
+        public async Task<long> Post() => (await queueService.InsertQueueAsync()).Id;
 
         // POST: api/Queue
         [HttpPost("Dequeue")]
-        public async Task<string> Dequeue(long id)
-        {
-            return (await queueService.DequeueAsync(id))?.Username;
-        }
+        public async Task<string> Dequeue(long id) => (await queueService.DequeueAsync(id))?.Username;
 
         // POST: api/Queue
         [HttpPost("Enqueue")]
@@ -86,9 +80,6 @@ namespace Qbg.WebAPI.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            queueService.DeleteAsync(id);
-        }
+        public void Delete(int id) => queueService.DeleteAsync(id);
     }
 }

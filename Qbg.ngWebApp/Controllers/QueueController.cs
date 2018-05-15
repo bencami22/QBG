@@ -58,9 +58,10 @@ namespace Qbg.ngWebApp.Controllers
         
         // POST: api/Queue
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Post()
         {
-            // new StringContent(jsonInString, Encoding.UTF8, "application/json")
+            var response = await client.PostAsync($"{url}/api/queue", null);
+            return StatusCode(response.StatusCode);
         }
 
         // PUT: api/Queue/5
@@ -71,8 +72,10 @@ namespace Qbg.ngWebApp.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var response = await client.DeleteAsync($"{url}/api/queue/{id}");
+            return StatusCode(response.StatusCode);
         }
     }
 }

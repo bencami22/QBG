@@ -27,4 +27,12 @@ export class QueueService {
   dequeue(id: number) {
     return this.http.post(this.baseUrl + 'api/queue/dequeue?id=' + id, null);
   }
+
+  createQueue() {
+    return this.http.post(this.baseUrl + 'api/queue', null);
+  }
+
+  deleteQueue(id: number) {
+    return this.http.delete(this.baseUrl + 'api/queue/' + id);
+  }
 }

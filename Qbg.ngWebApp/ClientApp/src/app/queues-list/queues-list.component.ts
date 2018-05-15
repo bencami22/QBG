@@ -16,6 +16,22 @@ export class QueuesListComponent {
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
+    this.refresh();
+  }
+
+  createQueue() {
+    this.queueService.createQueue()
+    .subscribe(result => {console.log(result); this.refresh(); },
+    error => {console.error(error); });
+  }
+
+  deleteQueue(id: number) {
+    this.queueService.deleteQueue(id)
+    .subscribe(result => {console.log(result); this.refresh(); },
+    error => {console.error(error); });
+  }
+
+  refresh(): void {
     this.queueService.getQueues()
       .subscribe(result => { this.queueGet = result; },
         error => { console.error(error); }

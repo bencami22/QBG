@@ -1,5 +1,6 @@
 <h1>Queues</h1>
 
+<button (click)="createQueue()" class="btn btn-primary">Create a new queue</button>
 <p>See all available queues:</p>
 
 <p *ngIf="!queueGet"><em>Loading...</em></p>
@@ -18,6 +19,10 @@
       <td>
           <a routerLink="/queue/{{queue.id}}" class="btn btn-primary">Select</a>
       </td>
+      <td>
+        <button (click)="deleteQueue(queue.id);" class="btn btn-primary">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
+
