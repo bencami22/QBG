@@ -45,7 +45,7 @@ namespace Qbg.ngWebApp.Controllers
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = await client.PostAsync($"{url}/api/queue/Enqueue", byteContent);
-            return StatusCode(response.StatusCode);
+            return StatusCode((int)response.StatusCode);
         }
 
 
@@ -53,7 +53,7 @@ namespace Qbg.ngWebApp.Controllers
         public async Task<IActionResult> Dequeue(long id)
         {
             var response = await client.PostAsync($"{url}/api/queue/Dequeue?id={id}", null);
-            return StatusCode(response.StatusCode);
+            return StatusCode((int)response.StatusCode);
         }
         
         // POST: api/Queue
@@ -61,7 +61,7 @@ namespace Qbg.ngWebApp.Controllers
         public async Task<IActionResult> Post()
         {
             var response = await client.PostAsync($"{url}/api/queue", null);
-            return StatusCode(response.StatusCode);
+            return StatusCode((int)response.StatusCode);
         }
 
         // PUT: api/Queue/5
@@ -75,7 +75,7 @@ namespace Qbg.ngWebApp.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var response = await client.DeleteAsync($"{url}/api/queue/{id}");
-            return StatusCode(response.StatusCode);
+            return StatusCode((int)response.StatusCode);
         }
     }
 }
